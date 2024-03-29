@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_admin_logs',
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_recaptcha",
     "scoutsalesapp.apps.ScoutsalesappConfig",
 ]
 
