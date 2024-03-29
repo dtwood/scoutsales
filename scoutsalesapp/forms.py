@@ -1,14 +1,16 @@
+import crispy_forms.layout
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit
 from django import forms
 from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha import widgets
 
 from scoutsalesapp.models import Item
 
 
 class ItemForm(forms.ModelForm):
-    captcha = ReCaptchaField()
+    captcha = ReCaptchaField(widget=widgets.ReCaptchaV3)
 
     class Meta:
         model = Item
@@ -24,6 +26,8 @@ class ItemForm(forms.ModelForm):
         helper.form_class = 'form-horizontal'
         helper.label_class = 'col-lg-2'
         helper.field_class = 'col-lg-10'
+        helper.form_action = '/items/create'
+        helper.form_method = 'POST'
         helper.layout = Layout(
             'seller_name',
             'seller_email',
@@ -31,8 +35,9 @@ class ItemForm(forms.ModelForm):
             'description',
             PrependedText('price', '£'),
             AppendedText('donation', '%'),
-            # FormActions(
-            #     Submit('submit', 'Submit', css_class="btn-primary"),
-            # )
+            crispy_forms.layout.Div('captcha'),
+            FormActions(
+                Submit('btnSubmit', 'Submit', css_class="btn-primary"),
+            )
         )
         return helper

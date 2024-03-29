@@ -5,12 +5,8 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<form action="/items/create" method="post">
-    <h1>Create item</h1>
-    {% csrf_token %}
-    {% crispy form %}
-    {{ form.captcha }}
-    <div class="mb-3"> <div class="aab col-lg-2"></div> <div class="col-lg-10"> <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-primary" id="submit-id-submit"> </div>
-</div>
-</form>
+    <div>
+        <h1>Create item</h1>
+        {% crispy form %}
+    </div>
 {% endblock %}
