@@ -3,6 +3,7 @@ from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit
 from django import forms
+from django.urls import reverse
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha import widgets
 
@@ -26,7 +27,7 @@ class ItemForm(forms.ModelForm):
         helper.form_class = 'form-horizontal'
         helper.label_class = 'col-lg-2'
         helper.field_class = 'col-lg-10'
-        helper.form_action = '/items/create'
+        helper.form_action = reverse('items-create')
         helper.form_method = 'POST'
         helper.layout = Layout(
             'seller_name',
