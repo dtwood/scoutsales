@@ -3,6 +3,7 @@ import secrets
 from django.core.exceptions import ValidationError
 from django.core import validators
 from django.db import models
+from django.utils.text import slugify
 
 
 class Item(models.Model):
@@ -18,10 +19,13 @@ class Item(models.Model):
         if self.slug != "":
             return super(Item, self).save(*args, **kwargs)
 
-        for _ in range(0, 10):
-            new_slug = secrets.token_hex(4)
+        initials = slugify(''.join(x[0] for x in self.seller_name.split(' ')).lower())
+        if initials == '':
+            raise ValueError("Couldn't generate a unique code.")
+        for i in range(1, 100):
+            new_slug = f"{initials}-{i:02}"
             if not Item.objects.filter(slug=new_slug).exists():
                 self.slug = new_slug
                 return super(Item, self).save(*args, **kwargs)
-            else:
-                raise ValueError("Couldn't generate a unique code.")
+        else:
+            raise ValueError("Couldn't generate a unique code.")
