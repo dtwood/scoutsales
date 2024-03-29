@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <h1>Item Created</h1>
+
+    <div class="alert alert-primary" role="alert">
+        Thank you for registering an item. Your unique ID is <mark>{{ item.slug }}</mark>.<br />
+        <strong>Please write down this ID, or bookmark this page.</strong> You will need it to get help about your item.
+    </div>
+
+    <h2>Item details</h2>
+    <table class="table" style="width: auto;">
+    <tr><th scope="col">Title</th><td>{{ item.title }}</td></tr>
+    <tr><th scope="col">Description</th><td>{{ item.description | linebreaks }}</td></tr>
+    <tr><th scope="col">Price</th><td>£{{ item.price }}</td></tr>
+    <tr><th scope="col">Donation</th><td>{{ item.donation }}%</td></tr>
+    </table>
+
+{% endblock %}
