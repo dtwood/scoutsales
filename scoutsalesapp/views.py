@@ -13,7 +13,7 @@ def create(request):
         if form.is_valid():
             item = form.save()
 
-            return HttpResponseRedirect(reverse("item-created", kwargs={'slug': item.slug}))
+            return HttpResponseRedirect(reverse("items-created", kwargs={'slug': item.slug}))
     else:
         form = ItemForm()
 
