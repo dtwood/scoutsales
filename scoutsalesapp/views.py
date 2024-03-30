@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.response import SimpleTemplateResponse
+from django.urls import reverse
 
 from scoutsalesapp.forms import ItemForm
 from scoutsalesapp.models import Item
@@ -12,7 +13,7 @@ def create(request):
         if form.is_valid():
             item = form.save()
 
-            return HttpResponseRedirect(f"/items/{item.slug}/created")
+            return HttpResponseRedirect(reverse("item-created", kwargs={'slug': item.slug}))
     else:
         form = ItemForm()
 
