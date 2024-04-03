@@ -21,6 +21,7 @@ from . import views
 
 urlpatterns = [
     path('', lambda request: HttpResponseRedirect('items/create')),
+    path('index.html', lambda request: HttpResponseRedirect('items/create')),
     path('items/create', views.create, name="items-create"),
     path('items/<slug:slug>/created', views.created, name="items-created"),
 ]
