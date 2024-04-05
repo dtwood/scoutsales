@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from scoutsalesapp.forms import ItemForm
@@ -22,7 +22,7 @@ def create(request):
 
 
 def item(request, slug):
-    item = Item.objects.get(slug=slug)
+    item = get_object_or_404(Item, slug=slug)
     token = request.GET.get('token')
 
     if token is not None and token == item.owner_token:
@@ -35,5 +35,5 @@ def item(request, slug):
 
 
 def print_item(request, slug):
-    item = Item.objects.get(slug=slug)
+    item = get_object_or_404(Item, slug=slug)
     return render(request, 'items/print.html', {"item": item})
