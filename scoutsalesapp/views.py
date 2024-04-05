@@ -14,7 +14,7 @@ def create(request):
             form = ItemForm(request.POST)
             if form.is_valid():
                 item = form.save()
-                return HttpResponseRedirect(reverse("items-created", kwargs={'slug': item.slug}) + f"?token={item.owner_token}")
+                return HttpResponseRedirect(reverse("items", kwargs={'slug': item.slug}) + f"?token={item.owner_token}")
     else:
         form = ItemForm()
 
