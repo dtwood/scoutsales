@@ -15,13 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.http import HttpResponseRedirect
-from django.urls import path
+from django.urls import path, reverse
 
 from . import views
 
 urlpatterns = [
-    path('', lambda request: HttpResponseRedirect('items/create')),
-    path('index.html', lambda request: HttpResponseRedirect('items/create')),
-    path('items/create', views.create, name="items-create"),
-    path('items/<slug:slug>/created', views.created, name="items-created"),
+    path('', lambda request: HttpResponseRedirect(reverse('items-create')), name='home'),
+    path('index.html', lambda request: HttpResponseRedirect(reverse('items-create'))),
+    path('items', views.create, name="items-create"),
+    path('items/<slug:slug>', views.item, name="items"),
+    path('items/<slug:slug>/print', views.print_item, name="items-print"),
 ]

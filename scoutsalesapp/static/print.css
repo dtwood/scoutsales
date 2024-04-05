@@ -1,0 +1,7 @@
+div.boxed {
+    padding: 5mm;
+    margin: 1cm auto 0 auto;
+    border: dashed 1pt;
+    width: fit-content;
+    max-width: 15cm;
+}

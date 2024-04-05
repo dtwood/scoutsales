@@ -16,6 +16,7 @@ class Item(models.Model):
                                                                         validators.MaxValueValidator(100)],
                                                 help_text="The percentage of the value of your item (minimum 25%) to donate to 11th/9th Cambridge Scout Group")
     slug = models.SlugField(primary_key=True)
+    owner_token = models.CharField(max_length=8, null=True, default=lambda: secrets.token_hex(4))
 
     def save(self, *args, **kwargs):
         if self.slug != "":
