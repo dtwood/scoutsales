@@ -19,6 +19,8 @@ class ItemForm(forms.ModelForm):
         labels = {
             "seller_email": "Your email address",
             "seller_name": "Your name",
+            "title": "Item name",
+            "description": "Item description",
         }
 
     @property

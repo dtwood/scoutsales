@@ -1,9 +1,18 @@
 import secrets
 
-from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 from django.core import validators
 from django.db import models
 from django.utils.text import slugify
+
+
+class Transaction(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    sold_at = models.DateTimeField(default=None, blank=True, null=True)
+
+
+def token_hex_4():
+    return secrets.token_hex(4)
 
 
 class Item(models.Model):
@@ -16,7 +25,8 @@ class Item(models.Model):
                                                                         validators.MaxValueValidator(100)],
                                                 help_text="The percentage of the value of your item (minimum 25%) to donate to 11th/9th Cambridge Scout Group")
     slug = models.SlugField(primary_key=True)
-    owner_token = models.CharField(max_length=8, null=True, default=lambda: secrets.token_hex(4))
+    owner_token = models.CharField(max_length=8, null=True, default=token_hex_4)
+    sold_in = models.ForeignKey(Transaction, on_delete=models.PROTECT, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.slug != "":

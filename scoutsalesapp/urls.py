@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.urls import path, reverse
 
@@ -25,4 +26,10 @@ urlpatterns = [
     path('items', views.create, name="items-create"),
     path('items/<slug:slug>', views.item, name="items"),
     path('items/<slug:slug>/print', views.print_item, name="items-print"),
+    path('transactions', views.transactions, name="transactions"),
+    path('transactions/active', views.basket, name="basket"),
+    path('transactions/active/add', views.basket_add, name="basket-add"),
+    path('transactions/active/sell', views.basket_sell, name="basket-sell"),
+    path('transactions/active/clear', views.basket_clear, name="basket-clear"),
+    path('transaction/<int:id>', views.transaction_view, name="transaction"),
 ]

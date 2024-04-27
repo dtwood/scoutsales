@@ -16,13 +16,19 @@
     {% if has_valid_token %}
         <div class="alert alert-primary" role="alert">
             Thank you for registering an item. Your unique ID is <mark class="font-monospace">{{ item.slug }}</mark>.<br />
-            <strong>Please write down this ID, or bookmark this page.</strong> You will need it to get help about your item.
+            <strong>Please write down this ID, or bookmark this page.</strong> You will need it to get help about your item. Please also print the tag (press the print button at the bottom of the page) and attach it to your item before bringing it to the sale.
         </div>
     {% endif %}
 
     <h2>Item details</h2>
     <table class="print-boxed table" style="width: auto;">
-    <tr><th scope="col">Title</th><td>{{ item.title }}</td></tr>
+    <tr><th scope="col">Title</th><td>
+        {% if sold %}
+            <strike>{{ item.title }}</strike> SOLD
+        {% else %}
+            {{ item.title }}
+        {% endif %}
+    </td></tr>
     <tr><th scope="col">Description</th><td>{{ item.description | linebreaks }}</td></tr>
     <tr><th scope="col">Price</th><td>£{{ item.price }}</td></tr>
     {% if has_valid_token %}

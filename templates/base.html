@@ -15,9 +15,12 @@
         <div>
             <a class="navbar-brand" href="{% url 'home' %}"><i class="bi bi-gift"></i> Nearly New Sale</a>
         </div>
-        <ul class="nav nav-pills">
+        <ul class="nav nav-underline">
             <li class="nav-item">
-                <a class="nav-link btn btn-primary" href="{% url 'admin:index' %}">Login</a>
+                <a class="nav-link" href="{% url 'transactions' %}">Transactions</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
             </li>
         </ul>
     </div>
