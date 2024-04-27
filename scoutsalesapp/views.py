@@ -76,9 +76,7 @@ def basket_sell(request):
 @permission_required("scoutsalesapp.add_transaction")
 def basket_clear(request):
     transaction = Transaction.objects.get_or_create(created_by=request.user, sold_at=None)[0]
-    transaction.created_by = None
-    transaction.sold_at = datetime.datetime.now()
-    transaction.sold_by = request.user
+    transaction.item_set.clear()
     transaction.save()
 
     return HttpResponseRedirect(reverse('basket'))
