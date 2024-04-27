@@ -28,6 +28,7 @@ urlpatterns = [
     path('items/<slug:slug>/print', views.print_item, name="items-print"),
     path('transactions', views.transactions, name="transactions"),
     path('transactions/active', views.basket, name="basket"),
+    path('transactions/active/notes', views.basket_notes, name="basket-notes"),
     path('transactions/active/add', views.basket_add, name="basket-add"),
     path('transactions/active/sell', views.basket_sell, name="basket-sell"),
     path('transactions/active/clear', views.basket_clear, name="basket-clear"),

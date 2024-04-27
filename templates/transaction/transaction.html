@@ -27,6 +27,13 @@
         </div>
     {% endif %}
 
+    {% if transaction.notes %}
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">Notes</h4>
+            {{ transaction.notes }}
+        </div>
+    {% endif %}
+
     <table class="table table-hover">
         <thead>
             <tr>

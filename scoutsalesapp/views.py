@@ -55,6 +55,17 @@ def basket(request):
 
 
 @permission_required("scoutsalesapp.add_transaction")
+def basket_notes(request):
+    transaction = Transaction.objects.get_or_create(created_by=request.user, sold_at=None)[0]
+
+    transaction.notes = request.POST['notes']
+    transaction.save()
+
+    return HttpResponseRedirect(reverse('basket'))
+
+
+
+@permission_required("scoutsalesapp.add_transaction")
 def basket_add(request):
     item = get_object_or_404(Item, slug=request.POST['slug'], sold_in=None)
     transaction = Transaction.objects.get_or_create(created_by=request.user, sold_at=None)[0]

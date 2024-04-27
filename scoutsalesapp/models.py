@@ -9,6 +9,7 @@ from django.utils.text import slugify
 class Transaction(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     sold_at = models.DateTimeField(default=None, blank=True, null=True)
+    notes = models.TextField(default="", blank=True)
 
 
 def token_hex_4():
