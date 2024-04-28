@@ -2,7 +2,7 @@ import datetime
 import logging
 
 from django.contrib.auth.decorators import permission_required
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -95,8 +95,10 @@ def basket_clear(request):
 
 @permission_required("scoutsalesapp.view_transaction")
 def transactions(request):
-    transactions = Transaction.objects.all().annotate(Sum('item__price')).order_by("-id")
-    return render(request, 'transaction/transactions.html', {"transactions": transactions})
+    transactions = Transaction.objects.all().annotate(Sum('item__price', default=0)).annotate(Count('item')).order_by("-id")
+    total_price = sum(t.item__price__sum for t in transactions)
+    total_count = sum(t.item__count for t in transactions)
+    return render(request, 'transaction/transactions.html', {"transactions": transactions, "total_price": total_price, "total_count": total_count})
 
 
 @permission_required("scoutsalesapp.view_transaction")

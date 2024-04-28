@@ -29,11 +29,20 @@
                 <th scope="row"><a href="{% url 'transaction' transaction.id %}"><span class="font-monospace">{{ transaction.id }}</span></a> </th>
                 <td>{% if transaction.sold_at %}{{ transaction.sold_at }}{% else %}<i>Unsold</i>{% endif %}</td>
                 <td>{{ transaction.created_by }}</td>
-                <td>{{ transaction.item_set.count }}</td>
+                <td>{{ transaction.item__count }}</td>
                 <td>£{% if transaction.item__price__sum %}{{ transaction.item__price__sum }}{% else %}0{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">Total</th>
+                <td></td>
+                <td></td>
+                <td>{{ total_count }}</td>
+                <td>£{{ total_price }}</td>
+            </tr>
+        </tfoot>
     </table>
 
     <a href="{% url 'basket' %}" class="btn btn-primary">Back to basket</a>
