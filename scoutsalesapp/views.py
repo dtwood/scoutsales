@@ -46,6 +46,14 @@ def print_item(request, slug):
     return render(request, 'items/print.html', {"item": item})
 
 
+@permission_required("scoutsalesapp.view_item")
+def items(request):
+    if request.GET.get('hide_sold') is None:
+        items = Item.objects.all()
+    else:
+        items = Item.objects.filter(sold_in__sold_at__isnull=True)
+    return render(request, 'items/items.html', {"items": items})
+
 @permission_required("scoutsalesapp.add_transaction")
 def basket(request):
     transaction = Transaction.objects.get_or_create(created_by=request.user, sold_at=None)[0]
