@@ -2,7 +2,7 @@ import datetime
 import logging
 
 from django.contrib.auth.decorators import permission_required
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, F, Max
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -53,6 +53,15 @@ def items(request):
     else:
         items = Item.objects.filter(sold_in__sold_at__isnull=True)
     return render(request, 'items/items.html', {"items": items})
+
+
+@permission_required("scoutsalesapp.view_item")
+def summary(request):
+    sellers = (Item.objects.filter(sold_in__sold_at__isnull=False).values('seller_email', 'seller_name')
+               .annotate(Sum('price'))
+               .annotate(donation__sum=Sum(F('price') * F('donation')/100))
+               .annotate(owed__sum=F('price__sum')-F('donation__sum')))
+    return render(request, 'items/summary.html', {"sellers": sellers})
 
 @permission_required("scoutsalesapp.add_transaction")
 def basket(request):
