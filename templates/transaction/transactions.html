@@ -45,6 +45,10 @@
         </tfoot>
     </table>
 
+    <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: {{ progress }}%"></div>
+    </div>
+    
     <a href="{% url 'basket' %}" class="btn btn-primary">Back to basket</a>
 
 {% endblock %}

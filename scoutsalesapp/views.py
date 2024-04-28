@@ -99,7 +99,8 @@ def transactions(request):
     total_price = sum(t.item__price__sum or 0 for t in transactions)
     total_count = sum(t.item__count for t in transactions)
     items = Item.objects.aggregate(Sum('price'), Count('slug'))
-    return render(request, 'transaction/transactions.html', {"transactions": transactions, "items": items, "total_price": total_price, "total_count": total_count})
+    progress = total_count / items['slug__count'] * 100
+    return render(request, 'transaction/transactions.html', {"transactions": transactions, "items": items, "total_price": total_price, "total_count": total_count, "progress": progress})
 
 
 @permission_required("scoutsalesapp.view_transaction")
