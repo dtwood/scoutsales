@@ -22,7 +22,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100, help_text="A brief name for your item, for example \"Electric kettle\"")
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    donation = models.PositiveSmallIntegerField(default=40, validators=[validators.MinValueValidator(10),
+    donation = models.PositiveSmallIntegerField(default=40, validators=[validators.MinValueValidator(25),
                                                                         validators.MaxValueValidator(100)],
                                                 help_text="The percentage of the value of your item (minimum 25%) to donate to 11th/9th Cambridge Scout Group")
     slug = models.SlugField(primary_key=True)
