@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>View Transaction</h1>
+    <h1>View Transaction <span class="font-monospace">{{ transaction.id }}</span></h1>
 
     {% if transaction.sold_at %}
         <div class="alert alert-success" role="alert">

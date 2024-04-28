@@ -12,6 +12,7 @@
 
 {% block content %}
     <h1>Basket</h1>
+    <h2>Transaction <span class="font-monospace">{{ transaction.id }}</span></h2>
 
     <form action="{% url 'basket-notes' %}" method="post" class="mt-3 mb-3">
         {% csrf_token %}

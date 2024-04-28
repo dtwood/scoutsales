@@ -26,7 +26,7 @@
         <tbody class="table-group-divider">
         {% for transaction in transactions %}
             <tr class="{% if transaction.sold_at %}table-success{% else %}table-warning{% endif %}">
-                <th scope="row"><a href="{% url 'transaction' transaction.id %}">{{ transaction.id }}</a> </th>
+                <th scope="row"><a href="{% url 'transaction' transaction.id %}"><span class="font-monospace">{{ transaction.id }}</span></a> </th>
                 <td>{% if transaction.sold_at %}{{ transaction.sold_at }}{% else %}<i>Unsold</i>{% endif %}</td>
                 <td>{{ transaction.created_by }}</td>
                 <td>{{ transaction.item_set.count }}</td>
