@@ -39,8 +39,8 @@
                 <th scope="row">Total</th>
                 <td></td>
                 <td></td>
-                <td>{{ total_count }}</td>
-                <td>£{{ total_price }}</td>
+                <td>{{ total_count }} / {{ items.slug__count }}</td>
+                <td>£{{ total_price }} / £{{ items.price__sum }}</td>
             </tr>
         </tfoot>
     </table>
